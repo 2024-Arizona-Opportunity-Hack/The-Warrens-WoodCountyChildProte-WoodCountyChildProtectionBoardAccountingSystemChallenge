@@ -1,4 +1,4 @@
-const app = require('./app');
+const app = require('./App');
 //const config = require('./src/config/config');
 
 // Start the server
