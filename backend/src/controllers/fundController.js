@@ -3,7 +3,7 @@ const { connectDB } = require('../config/db');
 async function getFund(req, res) {
     try {
         const db = await connectDB();
-        const fundCollection = db.collection('db');
+        const fundCollection = db.collection('funds');
         const funds = await fundCollection.find({}).toArray();
 
         res.status(200).json(funds);

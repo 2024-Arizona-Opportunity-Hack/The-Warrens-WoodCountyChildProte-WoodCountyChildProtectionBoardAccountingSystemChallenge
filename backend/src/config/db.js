@@ -25,12 +25,11 @@ async function connectDB() {
         await client.connect();
         console.log("Connected to MongoDB Atlas");
 
-        // Replace 'myDatabase' with your actual database name
         dbInstance = client.db('myDatabase');
         return dbInstance;
     } catch (error) {
         console.error("Error connecting to MongoDB Atlas:", error);
-        process.exit(1);  // Exit if connection fails
+        process.exit(1);
     }
 }
 
