@@ -3,12 +3,12 @@ const fundController = require('../controllers/fundController');
 const router = express.Router();
 
 // User Routes
-router.get('/', (req, res) => {
-    const grants = [
-      { id: 1, name: 'Grant A', amount: 1000 },
-      { id: 2, name: 'Grant B', amount: 5000 }
-    ];
-    res.json(grants);
-  });
+router.get('/', fundController.getFund);
+
+// Insert a new fund
+router.post('/', fundController.insertFund);
+
+// Delete a fund by ID
+router.delete('/:id', fundController.deleteFund);
 
 module.exports = router;
