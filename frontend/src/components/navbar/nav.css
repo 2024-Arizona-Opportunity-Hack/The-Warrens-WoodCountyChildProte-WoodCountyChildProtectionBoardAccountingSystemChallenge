@@ -1,0 +1,8 @@
+
+.button-styling {
+    @apply inline-flex items-center justify-center rounded-lg py-2 px-4 text-gray-800 font-medium shadow-sm hover:bg-gray-100 transition-colors;
+}
+
+.contact-button-styling {
+    @apply inline-flex items-center justify-center rounded-lg py-2 px-4 text-black bg-yellow-400 font-medium shadow-sm hover:bg-gray-100 transition-colors;
+}

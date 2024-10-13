@@ -2,14 +2,14 @@
 import { Routes, Route } from "react-router-dom";
 import ErrorComponent from "./constants/ErrorComponent";
 import Navbar from "./components/navbar/Navbar";
-import CSVUploader from "./components/CSVUploader";
+import CSVUploader from "./pages/CSVUploader";
 
 function App() {
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<CSVUploader />} />
+        <Route path="/fileUpload" element={<CSVUploader />} />
         <Route path="/*" element={<ErrorComponent />} />
       </Routes>
     </div>

@@ -1,6 +1,7 @@
 // CSVUploader.jsx
 import { useState, useRef } from "react";
 import Papa from "papaparse";
+import axios from "axios";
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 
 const CSVUploader = () => {
@@ -42,6 +43,15 @@ const CSVUploader = () => {
       notes: row["Notes"] || ""
     }));
     setJsonData(formattedData);
+
+    // Call the backend API to upload the data
+    axios.post('http://localhost:8000/api/fileUpload', formattedData)
+      .then((response) => {
+        console.log("Data successfully sent to the backend:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error uploading data:", error);
+      });
   };
 
   return (
