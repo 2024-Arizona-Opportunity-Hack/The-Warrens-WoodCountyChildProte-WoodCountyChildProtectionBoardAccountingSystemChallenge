@@ -3,14 +3,15 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 
 const COLORS = ["#6366F1", "#8B5CF6", "#EC4899", "#10B981", "#F59E0B"];
 
-const SALES_CHANNEL_DATA = [
-	{ name: "Website", value: 45600 },
-	{ name: "Mobile App", value: 38200 },
-	{ name: "Marketplace", value: 29800 },
-	{ name: "Social Media", value: 18700 },
+const grantData = [
+	{ name: "Child Welfare", value: 15000 },
+	{ name: "Education Support", value: 12000 },
+	{ name: "Health Initiatives", value: 10000 },
+	{ name: "Emergency Assistance", value: 9000 },
+	{ name: "Community Engagement", value: 7500 }
 ];
 
-const SalesChannelChart = () => {
+const GrantTrackingChart = () => {
 	return (
 		<motion.div
 			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 lg:col-span-2 border border-gray-700'
@@ -18,13 +19,16 @@ const SalesChannelChart = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.4 }}
 		>
-			<h2 className='text-lg font-medium mb-4 text-gray-100'>Sales by Channel</h2>
+			<h2 className='text-lg font-medium mb-4 text-gray-100'>Grant Tracking by Program</h2>
 
 			<div className='h-80'>
 				<ResponsiveContainer>
-					<BarChart data={SALES_CHANNEL_DATA}>
+					<BarChart
+						data={grantData}
+						margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+					>
 						<CartesianGrid strokeDasharray='3 3' stroke='#4B5563' />
-						<XAxis dataKey='name' stroke='#9CA3AF' />
+						<XAxis dataKey="name" stroke='#9CA3AF' />
 						<YAxis stroke='#9CA3AF' />
 						<Tooltip
 							contentStyle={{
@@ -34,8 +38,8 @@ const SalesChannelChart = () => {
 							itemStyle={{ color: "#E5E7EB" }}
 						/>
 						<Legend />
-						<Bar dataKey={"value"} fill='#8884d8'>
-							{SALES_CHANNEL_DATA.map((entry, index) => (
+						<Bar dataKey="value" fill='#8884d8'>
+							{grantData.map((entry, index) => (
 								<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
 							))}
 						</Bar>
@@ -45,4 +49,5 @@ const SalesChannelChart = () => {
 		</motion.div>
 	);
 };
-export default SalesChannelChart;
+
+export default GrantTrackingChart;

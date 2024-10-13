@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const app = require('./App');
+const app = require('./app');
 //const config = require('./src/config/config');
 
 // Start the server

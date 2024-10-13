@@ -1,4 +1,5 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
+require('dotenv').config(); // Ensure dotenv is configured to load environment variables
 
 // Use the connection string from environment variables
 const uri = process.env.MONGO_URI;
@@ -25,7 +26,7 @@ async function connectDB() {
         await client.connect();
         console.log("Connected to MongoDB Atlas");
 
-        dbInstance = client.db('myDatabase');
+        dbInstance = client.db('myDatabase'); // Replace 'myDatabase' with your database name
         return dbInstance;
     } catch (error) {
         console.error("Error connecting to MongoDB Atlas:", error);

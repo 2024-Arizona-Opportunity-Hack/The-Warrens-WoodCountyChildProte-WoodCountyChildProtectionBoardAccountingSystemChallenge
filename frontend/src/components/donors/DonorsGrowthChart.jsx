@@ -1,16 +1,16 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { motion } from "framer-motion";
 
-const userGrowthData = [
-	{ month: "Jan", users: 1000 },
-	{ month: "Feb", users: 1500 },
-	{ month: "Mar", users: 2000 },
-	{ month: "Apr", users: 3000 },
-	{ month: "May", users: 4000 },
-	{ month: "Jun", users: 5000 },
+const donerGrowthData = [
+	{ month: "Jan", users: 2000 },
+	{ month: "Feb", users: 3000 },
+	{ month: "Mar", users: 4000 },
+	{ month: "Apr", users: 6000 },
+	{ month: "May", users: 7000 },
+	{ month: "Jun", users: 8000 },
 ];
 
-const UserGrowthChart = () => {
+const DonersGrowthChart = () => {
 	return (
 		<motion.div
 			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
@@ -18,10 +18,10 @@ const UserGrowthChart = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.3 }}
 		>
-			<h2 className='text-xl font-semibold text-gray-100 mb-4'>User Growth</h2>
+			<h2 className='text-xl font-semibold text-gray-100 mb-4'>Donor Growth</h2>
 			<div className='h-[320px]'>
 				<ResponsiveContainer width='100%' height='100%'>
-					<LineChart data={userGrowthData}>
+					<LineChart data={donerGrowthData}>
 						<CartesianGrid strokeDasharray='3 3' stroke='#374151' />
 						<XAxis dataKey='month' stroke='#9CA3AF' />
 						<YAxis stroke='#9CA3AF' />
@@ -46,4 +46,4 @@ const UserGrowthChart = () => {
 		</motion.div>
 	);
 };
-export default UserGrowthChart;
+export default DonersGrowthChart;

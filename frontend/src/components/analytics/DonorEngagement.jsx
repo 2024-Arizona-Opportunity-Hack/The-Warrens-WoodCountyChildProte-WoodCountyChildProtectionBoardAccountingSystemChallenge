@@ -1,16 +1,22 @@
 import { motion } from "framer-motion";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
-const salesData = [
-	{ month: "Jan", sales: 4000 },
-	{ month: "Feb", sales: 3000 },
-	{ month: "Mar", sales: 5000 },
-	{ month: "Apr", sales: 4500 },
-	{ month: "May", sales: 6000 },
-	{ month: "Jun", sales: 5500 },
+const donorEngagementData = [
+	{ month: "Jan", donations: 50 },
+	{ month: "Feb", donations: 65 },
+	{ month: "Mar", donations: 70 },
+	{ month: "Apr", donations: 90 },
+	{ month: "May", donations: 80 },
+	{ month: "Jun", donations: 95 },
+	{ month: "Jul", donations: 110 },
+	{ month: "Aug", donations: 130 },
+	{ month: "Sep", donations: 120 },
+	{ month: "Oct", donations: 150 },
+	{ month: "Nov", donations: 170 },
+	{ month: "Dec", donations: 180 },
 ];
 
-const SalesTrendChart = () => {
+const DonorEngagement = () => {
 	return (
 		<motion.div
 			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
@@ -18,10 +24,10 @@ const SalesTrendChart = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.3 }}
 		>
-			<h2 className='text-xl font-semibold text-gray-100 mb-4'>Sales Trend</h2>
+			<h2 className='text-xl font-semibold text-gray-100 mb-4'>Donor Engagement Over Time</h2>
 			<div style={{ width: "100%", height: 300 }}>
 				<ResponsiveContainer>
-					<LineChart data={salesData}>
+					<LineChart data={donorEngagementData}>
 						<CartesianGrid strokeDasharray='3 3' stroke='#374151' />
 						<XAxis dataKey='month' stroke='#9CA3AF' />
 						<YAxis stroke='#9CA3AF' />
@@ -33,11 +39,12 @@ const SalesTrendChart = () => {
 							itemStyle={{ color: "#E5E7EB" }}
 						/>
 						<Legend />
-						<Line type='monotone' dataKey='sales' stroke='#8B5CF6' strokeWidth={2} />
+						<Line type='monotone' dataKey='donations' stroke='#8B5CF6' strokeWidth={2} />
 					</LineChart>
 				</ResponsiveContainer>
 			</div>
 		</motion.div>
 	);
 };
-export default SalesTrendChart;
+
+export default DonorEngagement;

@@ -1,15 +1,14 @@
 import { motion } from "framer-motion";
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
-const orderStatusData = [
-	{ name: "Pending", value: 30 },
-	{ name: "Processing", value: 45 },
-	{ name: "Shipped", value: 60 },
-	{ name: "Delivered", value: 120 },
+const fundData = [
+	{ name: "Restricted Funds", value: 32000 },
+	{ name: "Unrestricted Funds", value: 16300 },
 ];
-const COLORS = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#FED766", "#2AB7CA"];
 
-const OrderDistribution = () => {
+const COLORS = ["#6366F1", "#10B981"];
+
+const FundAllocationChart = () => {
 	return (
 		<motion.div
 			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
@@ -17,20 +16,21 @@ const OrderDistribution = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.3 }}
 		>
-			<h2 className='text-xl font-semibold text-gray-100 mb-4'>Order Status Distribution</h2>
-			<div style={{ width: "100%", height: 300 }}>
-				<ResponsiveContainer>
+			<h2 className='text-lg font-medium mb-4 text-gray-100'>Fund Allocation Overview</h2>
+			<div className='h-80'>
+				<ResponsiveContainer width={"100%"} height={"100%"}>
 					<PieChart>
 						<Pie
-							data={orderStatusData}
-							cx='50%'
-							cy='50%'
+							data={fundData}
+							cx={"50%"}
+							cy={"50%"}
+							labelLine={false}
 							outerRadius={80}
 							fill='#8884d8'
 							dataKey='value'
 							label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
 						>
-							{orderStatusData.map((entry, index) => (
+							{fundData.map((entry, index) => (
 								<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
 							))}
 						</Pie>
@@ -48,4 +48,4 @@ const OrderDistribution = () => {
 		</motion.div>
 	);
 };
-export default OrderDistribution;
+export default FundAllocationChart;

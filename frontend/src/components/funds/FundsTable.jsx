@@ -1,27 +1,27 @@
 import { motion } from "framer-motion";
-import { Edit, Search, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { Edit, Search, Trash2 } from "lucide-react";
 
-const PRODUCT_DATA = [
-	{ id: 1, name: "Wireless Earbuds", category: "Electronics", price: 59.99, stock: 143, sales: 1200 },
-	{ id: 2, name: "Leather Wallet", category: "Accessories", price: 39.99, stock: 89, sales: 800 },
-	{ id: 3, name: "Smart Watch", category: "Electronics", price: 199.99, stock: 56, sales: 650 },
-	{ id: 4, name: "Yoga Mat", category: "Fitness", price: 29.99, stock: 210, sales: 950 },
-	{ id: 5, name: "Coffee Maker", category: "Home", price: 79.99, stock: 78, sales: 720 },
+const FUND_DATA = [
+	{ id: 1, name: "Child Welfare", category: "Health", balance: "$15,000", allocation: "$20,000" },
+	{ id: 2, name: "Education Support", category: "Education", balance: "$12,000", allocation: "$15,000" },
+	{ id: 3, name: "Health Initiatives", category: "Health", balance: "$10,000", allocation: "$15,000" },
+	{ id: 4, name: "Emergency Assistance", category: "Relief", balance: "$9,000", allocation: "$20,000" },
+	{ id: 5, name: "Community Engagement", category: "Community", balance: "$7,500", allocation: "$10,000" },
 ];
 
-const ProductsTable = () => {
+const FundsTable = () => {
 	const [searchTerm, setSearchTerm] = useState("");
-	const [filteredProducts, setFilteredProducts] = useState(PRODUCT_DATA);
+	const [filteredFunds, setFilteredFunds] = useState(FUND_DATA);
 
 	const handleSearch = (e) => {
 		const term = e.target.value.toLowerCase();
 		setSearchTerm(term);
-		const filtered = PRODUCT_DATA.filter(
-			(product) => product.name.toLowerCase().includes(term) || product.category.toLowerCase().includes(term)
+		const filtered = FUND_DATA.filter(
+			(fund) => fund.name.toLowerCase().includes(term) || fund.category.toLowerCase().includes(term)
 		);
 
-		setFilteredProducts(filtered);
+		setFilteredFunds(filtered);
 	};
 
 	return (
@@ -32,11 +32,11 @@ const ProductsTable = () => {
 			transition={{ delay: 0.2 }}
 		>
 			<div className='flex justify-between items-center mb-6'>
-				<h2 className='text-xl font-semibold text-gray-100'>Product List</h2>
+				<h2 className='text-xl font-semibold text-gray-100'>Funds Overview</h2>
 				<div className='relative'>
 					<input
 						type='text'
-						placeholder='Search products...'
+						placeholder='Search funds...'
 						className='bg-gray-700 text-white placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
 						onChange={handleSearch}
 						value={searchTerm}
@@ -56,13 +56,10 @@ const ProductsTable = () => {
 								Category
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
-								Price
+								Balance
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
-								Stock
-							</th>
-							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
-								Sales
+								Allocation
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
 								Actions
@@ -71,31 +68,25 @@ const ProductsTable = () => {
 					</thead>
 
 					<tbody className='divide-y divide-gray-700'>
-						{filteredProducts.map((product) => (
+						{filteredFunds.map((fund) => (
 							<motion.tr
-								key={product.id}
+								key={fund.id}
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								transition={{ duration: 0.3 }}
 							>
-								<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100 flex gap-2 items-center'>
-									<img
-										src='https://images.unsplash.com/photo-1627989580309-bfaf3e58af6f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2lyZWxlc3MlMjBlYXJidWRzfGVufDB8fDB8fHww'
-										alt='Product img'
-										className='size-10 rounded-full'
-									/>
-									{product.name}
+								<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100'>
+									{fund.name}
 								</td>
-
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
-									{product.category}
+									{fund.category}
 								</td>
-
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
-									${product.price.toFixed(2)}
+									{fund.balance}
 								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>{product.stock}</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>{product.sales}</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
+									{fund.allocation}
+								</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
 									<button className='text-indigo-400 hover:text-indigo-300 mr-2'>
 										<Edit size={18} />
@@ -112,4 +103,5 @@ const ProductsTable = () => {
 		</motion.div>
 	);
 };
-export default ProductsTable;
+
+export default FundsTable;

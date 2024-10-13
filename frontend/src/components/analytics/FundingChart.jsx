@@ -1,18 +1,18 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { useState } from "react";
 
-const monthlySalesData = [
-	{ month: "Jan", sales: 4000 },
-	{ month: "Feb", sales: 3000 },
-	{ month: "Mar", sales: 5000 },
-	{ month: "Apr", sales: 4500 },
-	{ month: "May", sales: 6000 },
-	{ month: "Jun", sales: 5500 },
-	{ month: "Jul", sales: 7000 },
+const fundingData = [
+	{ month: "Jan", funding: 5000, target: 4800 },
+	{ month: "Feb", funding: 6500, target: 6000 },
+	{ month: "Mar", funding: 7000, target: 7200 },
+	{ month: "Apr", funding: 8500, target: 8000 },
+	{ month: "May", funding: 9200, target: 9000 },
+	{ month: "Jun", funding: 10500, target: 10000 },
+	{ month: "Jul", funding: 11000, target: 10800 },
 ];
 
-const SalesOverviewChart = () => {
+const FundingChart = () => {
 	const [selectedTimeRange, setSelectedTimeRange] = useState("This Month");
 
 	return (
@@ -22,13 +22,10 @@ const SalesOverviewChart = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.2 }}
 		>
-			<div className='flex items-center justify-between mb-6'>
-				<h2 className='text-xl font-semibold text-gray-100'>Sales Overview</h2>
-
+			<div className='flex justify-between items-center mb-6'>
+				<h2 className='text-xl font-semibold text-gray-100'>Funding vs Target</h2>
 				<select
-					className='bg-gray-700 text-white rounded-md px-3 py-1 focus:outline-none focus:ring-2 
-          focus:ring-blue-500
-          '
+					className='bg-gray-700 text-white rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500'
 					value={selectedTimeRange}
 					onChange={(e) => setSelectedTimeRange(e.target.value)}
 				>
@@ -39,9 +36,9 @@ const SalesOverviewChart = () => {
 				</select>
 			</div>
 
-			<div className='w-full h-80'>
+			<div style={{ width: "100%", height: 400 }}>
 				<ResponsiveContainer>
-					<AreaChart data={monthlySalesData}>
+					<AreaChart data={fundingData}>
 						<CartesianGrid strokeDasharray='3 3' stroke='#374151' />
 						<XAxis dataKey='month' stroke='#9CA3AF' />
 						<YAxis stroke='#9CA3AF' />
@@ -49,11 +46,12 @@ const SalesOverviewChart = () => {
 							contentStyle={{ backgroundColor: "rgba(31, 41, 55, 0.8)", borderColor: "#4B5563" }}
 							itemStyle={{ color: "#E5E7EB" }}
 						/>
-						<Area type='monotone' dataKey='sales' stroke='#8B5CF6' fill='#8B5CF6' fillOpacity={0.3} />
+						<Area type='monotone' dataKey='funding' stroke='#8B5CF6' fill='#8B5CF6' fillOpacity={0.3} />
+						<Area type='monotone' dataKey='target' stroke='#10B981' fill='#10B981' fillOpacity={0.3} />
 					</AreaChart>
 				</ResponsiveContainer>
 			</div>
 		</motion.div>
 	);
 };
-export default SalesOverviewChart;
+export default FundingChart;

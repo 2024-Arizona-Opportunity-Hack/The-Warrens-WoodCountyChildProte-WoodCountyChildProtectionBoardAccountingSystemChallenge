@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import Papa from "papaparse";
+import axios from "axios";
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Modal, Box, TextField, MenuItem } from "@mui/material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Header from "../components/common/Header";
@@ -49,18 +50,38 @@ const CSVUploader = () => {
     setModalOpen(false);
   };
 
-  const handleUpload = () => {
-    const newUpload = {
-      fileName: fileName || "Unnamed File",
-      dataType,
-      status: "SUCCESS",
-      totalRows: jsonData.length,
-      failedRows: "-",
-      uploadedAt: new Date().toLocaleDateString(),
-    };
+  const handleUpload = async () => {
+    const formattedData = jsonData.map((row, index) => ({
+      id: index + 1,
+      fund_source: row["Fund Source"] || "",
+      type: row["Type"] || "",
+      total_amount: row["Total Amount"] || "",
+      allocated_amount: row["Allocated Amount"] || "",
+      remaining_balance: row["Remaining Balance"] || "",
+      restrictions: row["Restrictions"] || "",
+      notes: row["Notes"] || ""
+    }));
 
-    setPreviousUploads((prevUploads) => [...prevUploads, newUpload]);
-    setModalOpen(false);
+    try {
+      const response = await axios.post("http://localhost:5000/api/fileUpload", formattedData);
+      if (response.status === 201) {
+        const newUpload = {
+          fileName: fileName || "Unnamed File",
+          dataType,
+          status: "SUCCESS",
+          totalRows: jsonData.length,
+          failedRows: "-",
+          uploadedAt: new Date().toLocaleDateString(),
+        };
+
+        setPreviousUploads((prevUploads) => [...prevUploads, newUpload]);
+        setModalOpen(false);
+        alert("Data uploaded successfully!");
+      }
+    } catch (error) {
+      console.error("Error uploading data:", error);
+      alert("An error occurred while uploading the data. Please try again.");
+    }
   };
 
   const handleFileDrop = (event) => {
@@ -78,7 +99,7 @@ const CSVUploader = () => {
   return (
     <div className="flex-1 overflow-auto relative z-10" style={{ height: '100vh' }}>
       <Header title="Upload CSV and Map Fields" />
-      <div className="flex items-center justify-center  w-full">
+      <div className="flex items-center justify-center w-full">
         <div className="w-11/12 max-w-4xl bg-gray-1000 p-10 text-white flex flex-col gap-8">
           
           {/* File Upload Section */}
@@ -89,24 +110,24 @@ const CSVUploader = () => {
               onDragOver={handleDragOver} 
               className="border-dashed border-2 border-gray-500 rounded-lg p-10 flex flex-col items-center text-center cursor-pointer w-full"
             >
-          <CloudUploadIcon fontSize="large" className="text-gray-400 mb-4" />
-          <Typography variant="h6" className="mb-2 text-gray-300">Drag and drop file here</Typography>
-          <Typography variant="body2" className="text-gray-500 mb-7">Drag and drop or browse your file to get started</Typography>
-          <Button
-            variant="contained"
-            component="label"
-            className="px-4 py-5 mt-5 bg-gray-900 border-gray-700 border text-white rounded-md shadow-xl transform transition-transform duration-300 hover:scale-105"
-            style={{ marginTop: '20px' }} // Added margin-top for padding
-          >
-            Browse your files
-            <input
-              type="file"
-              accept=".csv"
-              onChange={handleFileChange}
-              hidden
-              ref={fileInputRef}
-            />
-          </Button>
+              <CloudUploadIcon fontSize="large" className="text-gray-400 mb-4" />
+              <Typography variant="h6" className="mb-2 text-gray-300">Drag and drop file here</Typography>
+              <Typography variant="body2" className="text-gray-500 mb-7">Drag and drop or browse your file to get started</Typography>
+              <Button
+                variant="contained"
+                component="label"
+                className="px-4 py-5 mt-5 bg-gray-900 border-gray-700 border text-white rounded-md shadow-xl transform transition-transform duration-300 hover:scale-105"
+                style={{ marginTop: '20px' }}
+              >
+                Browse your files
+                <input
+                  type="file"
+                  accept=".csv"
+                  onChange={handleFileChange}
+                  hidden
+                  ref={fileInputRef}
+                />
+              </Button>
             </div>
           </div>
 
@@ -149,7 +170,7 @@ const CSVUploader = () => {
                 width: 900,
                 height: 700,
                 overflowY: "auto",
-                marginRight: '18%', // Moves the modal towards the right
+                marginRight: '20%', // Moves the modal towards the right
               }}
             >
               <div className="flex justify-between items-center mb-4">

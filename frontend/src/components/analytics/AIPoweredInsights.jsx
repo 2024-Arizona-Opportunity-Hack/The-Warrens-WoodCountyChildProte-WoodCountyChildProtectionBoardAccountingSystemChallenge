@@ -1,28 +1,29 @@
 import { motion } from "framer-motion";
-import { TrendingUp, Users, ShoppingBag, DollarSign } from "lucide-react";
+import { TrendingUp, Users, ShoppingBag, DollarSign, Eye } from "lucide-react";
 
 const INSIGHTS = [
 	{
-		icon: TrendingUp,
+		icon: DollarSign,
 		color: "text-green-500",
-		insight: "Revenue is up 15% compared to last month, driven primarily by a successful email campaign.",
+		insight: "Program funding increased by 20% due to targeted donor engagement efforts.",
 	},
 	{
 		icon: Users,
 		color: "text-blue-500",
-		insight: "Customer retention has improved by 8% following the launch of the new loyalty program.",
+		insight: "Donor retention improved by 15% following the launch of a new community outreach program.",
 	},
 	{
 		icon: ShoppingBag,
 		color: "text-purple-500",
-		insight: 'Product category "Electronics" shows the highest growth potential based on recent market trends.',
+		insight: "Emergency Assistance Fund saw the highest increase in utilization this quarter.",
 	},
 	{
-		icon: DollarSign,
+		icon: Eye,
 		color: "text-yellow-500",
-		insight: "Optimizing pricing strategy could potentially increase overall profit margins by 5-7%.",
+		insight: "Increasing transparency in expense reporting could improve donor trust and engagement by 7-10%.",
 	},
 ];
+
 
 const AIPoweredInsights = () => {
 	return (

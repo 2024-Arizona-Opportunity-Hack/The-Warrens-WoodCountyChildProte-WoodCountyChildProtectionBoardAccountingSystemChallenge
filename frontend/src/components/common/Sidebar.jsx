@@ -12,7 +12,6 @@ const SIDEBAR_ITEMS = [
 	},
 	{ name: "Funds", icon: ShoppingBag, color: "#8B5CF6", href: "/funds" },
 	{ name: "Donors", icon: Users, color: "#EC4899", href: "/donors" },
-	{ name: "Revenue", icon: DollarSign, color: "#10B981", href: "/revenue" },
 	{ name: "Expenses", icon: ShoppingCart, color: "#F59E0B", href: "/expenses" },
 	{ name: "Reports", icon: TrendingUp, color: "#3B82F6", href: "/reports" },
 	{ name: "Settings", icon: Settings, color: "#6EE7B7", href: "/settings" }	

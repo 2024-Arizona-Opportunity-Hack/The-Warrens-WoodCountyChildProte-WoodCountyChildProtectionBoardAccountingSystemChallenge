@@ -3,9 +3,10 @@ import { motion } from "framer-motion";
 
 import Header from "../components/common/Header";
 import StatCard from "../components/common/StatCard";
-import SalesOverviewChart from "../components/overview/SalesOverviewChart";
-import CategoryDistributionChart from "../components/overview/CategoryDistributionChart";
-import SalesChannelChart from "../components/overview/SalesChannelChart";
+
+import GrantTrackingChart from "../components/overview/GrantTrackingChart";
+import DonationChannelChart from "../components/overview/DonationChannelChart";
+import FundAllocationChart from "../components/overview/FundAllocationChart";
 
 const OverviewPage = () => {
 	return (
@@ -20,18 +21,17 @@ const OverviewPage = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 1 }}
 				>
-					<StatCard name='Total Sales' icon={Zap} value='$12,345' color='#6366F1' />
-					<StatCard name='New Users' icon={Users} value='1,234' color='#8B5CF6' />
-					<StatCard name='Total Products' icon={ShoppingBag} value='567' color='#EC4899' />
-					<StatCard name='Conversion Rate' icon={BarChart2} value='12.5%' color='#10B981' />
+					<StatCard name='Total Donations' icon={Zap} value='$45,000' color='#6366F1' />
+					<StatCard name='Active Donors' icon={Users} value='245' color='#8B5CF6' />
+					<StatCard name='Grants Received' icon={ShoppingBag} value='$120,000' color='#EC4899' />
+					<StatCard name='Fund Utilization' icon={BarChart2} value='75%' color='#10B981' />
 				</motion.div>
-
 				{/* CHARTS */}
 
 				<div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-					<SalesOverviewChart />
-					<CategoryDistributionChart />
-					<SalesChannelChart />
+					<FundAllocationChart/>
+					<DonationChannelChart />
+					<GrantTrackingChart/>
 				</div>
 			</main>
 		</div>

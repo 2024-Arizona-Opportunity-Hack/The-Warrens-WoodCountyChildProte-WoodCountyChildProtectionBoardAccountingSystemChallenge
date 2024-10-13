@@ -1,18 +1,17 @@
 import { UserCheck, UserPlus, UsersIcon, UserX } from "lucide-react";
 import { motion } from "framer-motion";
-
 import Header from "../components/common/Header";
 import StatCard from "../components/common/StatCard";
-import UsersTable from "../components/donors/UsersTable";
-import UserGrowthChart from "../components/donors/UserGrowthChart";
-import UserActivityHeatmap from "../components/donors/UserActivityHeatmap";
-import UserDemographicsChart from "../components/donors/UserDemographicsChart";
+import DonorsTable from "../components/donors/DonorsTable";
+import DonersGrowthChart from "../components/donors/DonorsGrowthChart";
+import DonorActivityHeatmap from "../components/donors/DonorsActivityHeatmap";
+import DonorsDemographicsChart from "../components/donors/DonorsDemographicsChart";
 
 const donorStats = {
 	totalDonors: 152845,
 	newDonorsToday: 243,
 	activeDonors: 98520,
-	churnRate: "2.4%",
+	retentionRate: "97.6%",  // Adjusted from churn rate for relevance
 };
 
 const DonorsPage = () => {
@@ -41,16 +40,16 @@ const DonorsPage = () => {
 						value={donorStats.activeDonors.toLocaleString()}
 						color='#F59E0B'
 					/>
-					<StatCard name='Churn Rate' icon={UserX} value={donorStats.churnRate} color='#EF4444' />
+					<StatCard name='Retention Rate' icon={UserX} value={donorStats.retentionRate} color='#EF4444' />
 				</motion.div>
 
-				<UsersTable />
+				<DonorsTable />
 
 				{/* DONOR CHARTS */}
 				<div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8'>
-					<UserGrowthChart />
-					<UserActivityHeatmap />
-					<UserDemographicsChart />
+					<DonersGrowthChart />
+					<DonorActivityHeatmap />
+					<DonorsDemographicsChart />
 				</div>
 			</main>
 		</div>

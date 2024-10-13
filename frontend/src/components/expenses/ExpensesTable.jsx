@@ -2,28 +2,28 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Search, Eye } from "lucide-react";
 
-const orderData = [
-	{ id: "ORD001", customer: "John Doe", total: 235.4, status: "Delivered", date: "2023-07-01" },
-	{ id: "ORD002", customer: "Jane Smith", total: 412.0, status: "Processing", date: "2023-07-02" },
-	{ id: "ORD003", customer: "Bob Johnson", total: 162.5, status: "Shipped", date: "2023-07-03" },
-	{ id: "ORD004", customer: "Alice Brown", total: 750.2, status: "Pending", date: "2023-07-04" },
-	{ id: "ORD005", customer: "Charlie Wilson", total: 95.8, status: "Delivered", date: "2023-07-05" },
-	{ id: "ORD006", customer: "Eva Martinez", total: 310.75, status: "Processing", date: "2023-07-06" },
-	{ id: "ORD007", customer: "David Lee", total: 528.9, status: "Shipped", date: "2023-07-07" },
-	{ id: "ORD008", customer: "Grace Taylor", total: 189.6, status: "Delivered", date: "2023-07-08" },
+const expenseData = [
+	{ id: "EXP001", program: "Child Welfare", amount: 1200.0, status: "Approved", date: "2023-07-01" },
+	{ id: "EXP002", program: "Education Support", amount: 700.0, status: "Pending", date: "2023-07-02" },
+	{ id: "EXP003", program: "Health Initiatives", amount: 1500.0, status: "Approved", date: "2023-07-03" },
+	{ id: "EXP004", program: "Community Engagement", amount: 400.0, status: "Pending", date: "2023-07-04" },
+	{ id: "EXP005", program: "Emergency Assistance", amount: 2500.0, status: "Approved", date: "2023-07-05" },
+	{ id: "EXP006", program: "Nutrition Programs", amount: 950.0, status: "Approved", date: "2023-07-06" },
+	{ id: "EXP007", program: "Family Support", amount: 620.0, status: "Pending", date: "2023-07-07" },
+	{ id: "EXP008", program: "Mental Health Resources", amount: 1100.0, status: "Approved", date: "2023-07-08" },
 ];
 
-const OrdersTable = () => {
+const ExpensesTable = () => {
 	const [searchTerm, setSearchTerm] = useState("");
-	const [filteredOrders, setFilteredOrders] = useState(orderData);
+	const [filteredExpenses, setFilteredExpenses] = useState(expenseData);
 
 	const handleSearch = (e) => {
 		const term = e.target.value.toLowerCase();
 		setSearchTerm(term);
-		const filtered = orderData.filter(
-			(order) => order.id.toLowerCase().includes(term) || order.customer.toLowerCase().includes(term)
+		const filtered = expenseData.filter(
+			(expense) => expense.id.toLowerCase().includes(term) || expense.program.toLowerCase().includes(term)
 		);
-		setFilteredOrders(filtered);
+		setFilteredExpenses(filtered);
 	};
 
 	return (
@@ -34,11 +34,11 @@ const OrdersTable = () => {
 			transition={{ delay: 0.4 }}
 		>
 			<div className='flex justify-between items-center mb-6'>
-				<h2 className='text-xl font-semibold text-gray-100'>Order List</h2>
+				<h2 className='text-xl font-semibold text-gray-100'>Expense List</h2>
 				<div className='relative'>
 					<input
 						type='text'
-						placeholder='Search orders...'
+						placeholder='Search expenses...'
 						className='bg-gray-700 text-white placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
 						value={searchTerm}
 						onChange={handleSearch}
@@ -52,13 +52,13 @@ const OrdersTable = () => {
 					<thead>
 						<tr>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
-								Order ID
+								Expense ID
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
-								Customer
+								Program
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
-								Total
+								Amount
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
 								Status
@@ -72,39 +72,35 @@ const OrdersTable = () => {
 						</tr>
 					</thead>
 
-					<tbody className='divide divide-gray-700'>
-						{filteredOrders.map((order) => (
+					<tbody className='divide-y divide-gray-700'>
+						{filteredExpenses.map((expense) => (
 							<motion.tr
-								key={order.id}
+								key={expense.id}
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								transition={{ duration: 0.3 }}
 							>
 								<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100'>
-									{order.id}
+									{expense.id}
 								</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100'>
-									{order.customer}
+									{expense.program}
 								</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100'>
-									${order.total.toFixed(2)}
+									${expense.amount.toFixed(2)}
 								</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
 									<span
 										className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-											order.status === "Delivered"
+											expense.status === "Approved"
 												? "bg-green-100 text-green-800"
-												: order.status === "Processing"
-												? "bg-yellow-100 text-yellow-800"
-												: order.status === "Shipped"
-												? "bg-blue-100 text-blue-800"
-												: "bg-red-100 text-red-800"
+												: "bg-yellow-100 text-yellow-800"
 										}`}
 									>
-										{order.status}
+										{expense.status}
 									</span>
 								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>{order.date}</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>{expense.date}</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
 									<button className='text-indigo-400 hover:text-indigo-300 mr-2'>
 										<Eye size={18} />
@@ -118,4 +114,5 @@ const OrdersTable = () => {
 		</motion.div>
 	);
 };
-export default OrdersTable;
+
+export default ExpensesTable;

@@ -4,7 +4,6 @@ import Sidebar from "./components/common/Sidebar";
 import OverviewPage from "./pages/OverviewPage";
 import FundsPage from "./pages/FundsPage";
 import DonorsPage from "./pages/DonorsPage";
-import RevenuePage from "./pages/RevenuePage";
 import ExpensesPage from "./pages/ExpensesPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
@@ -27,7 +26,6 @@ function App() {
 			<Route path='/' element={<OverviewPage />} />
 			<Route path='/funds' element={<FundsPage />} />
 			<Route path='/donors' element={<DonorsPage />} />
-			<Route path='/revenue' element={<RevenuePage />} />
 			<Route path='/expenses' element={<ExpensesPage />} />
 			<Route path='/reports' element={<ReportsPage />} />
 			<Route path='/settings' element={<SettingsPage />} />
