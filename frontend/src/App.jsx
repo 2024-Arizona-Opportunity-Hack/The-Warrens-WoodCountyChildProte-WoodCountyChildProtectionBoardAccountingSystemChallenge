@@ -9,6 +9,8 @@ import ExpensesPage from "./pages/ExpensesPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import CSVUploader from "./pages/CSVUploader";
+import FundAccounting from "./pages/FundAccounting";
+import GrantTracking from "./pages/GrantTracking";
 
 
 function App() {
@@ -29,7 +31,10 @@ function App() {
 			<Route path='/expenses' element={<ExpensesPage />} />
 			<Route path='/reports' element={<ReportsPage />} />
 			<Route path='/settings' element={<SettingsPage />} />
-			<Route path='/fileUpload' element={<CSVUploader />} /> {/* Add Route for CSVUploader */}
+			<Route path='/fileUpload' element={<CSVUploader />} />
+			<Route path='/fundAccounting' element={<FundAccounting />} />  
+			<Route path='/grantTracking' element={<GrantTracking />} />  
+			{/* Add Route for CSVUploader */}
 			</Routes>
 		</div>
 	);
