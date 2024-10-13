@@ -1,8 +1,8 @@
-// CSVUploader.jsx
 import { useState, useRef } from "react";
 import Papa from "papaparse";
 import axios from "axios";
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from "@mui/material";
+import Header from "../components/common/Header";
 
 const CSVUploader = () => {
   const [data, setData] = useState([]);
@@ -55,8 +55,24 @@ const CSVUploader = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+    <div className='flex-1 overflow-auto relative z-10 bg-gray-900'>
+
+    <Header title={"CSV Upload"} />
+    <div className={`flex flex-col items-center ${data.length === 0 && !jsonData ? 'justify-center' : 'justify-start'} min-h-screen p-5`}>
+      <Typography 
+        variant="h4" 
+        gutterBottom 
+        style={{ 
+          color: 'white', 
+          textShadow: '1px 1px 2px black, -1px -1px 2px black', 
+          marginBottom: '20px'
+        }}
+      >
+        CSV Uploader
+      </Typography>
+
+      {/* Centered Button Container */}
+      <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center items-center">
         <Button
           variant="contained"
           component="label"
@@ -67,6 +83,7 @@ const CSVUploader = () => {
             '&:hover': {
               backgroundColor: 'darkgreen',
             },
+            textShadow: '1px 1px 2px black, -1px -1px 2px black',
           }}
         >
           Upload CSV
@@ -89,6 +106,7 @@ const CSVUploader = () => {
             '&:hover': {
               backgroundColor: 'darkred',
             },
+            textShadow: '1px 1px 2px black, -1px -1px 2px black',
           }}
         >
           Reset
@@ -104,6 +122,7 @@ const CSVUploader = () => {
             '&:hover': {
               backgroundColor: 'darkblue',
             },
+            textShadow: '1px 1px 2px black, -1px -1px 2px black',
           }}
         >
           Convert to JSON
@@ -111,7 +130,7 @@ const CSVUploader = () => {
       </div>
 
       {data.length > 0 && (
-        <TableContainer component={Paper} sx={{ marginTop: '20px', width: '80%' }}>
+        <TableContainer component={Paper} className="mt-5 w-4/5">
           <Table>
             <TableHead>
               <TableRow>
@@ -134,10 +153,11 @@ const CSVUploader = () => {
       )}
 
       {jsonData && (
-        <Paper sx={{ marginTop: '20px', padding: '10px', backgroundColor: '#f5f5f5', width: '80%' }}>
+        <Paper className="mt-5 p-4 bg-gray-100 w-4/5">
           <pre>{JSON.stringify(jsonData, null, 2)}</pre>
         </Paper>
       )}
+    </div>
     </div>
   );
 };
